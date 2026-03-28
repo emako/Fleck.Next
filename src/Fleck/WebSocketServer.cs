@@ -38,7 +38,7 @@ namespace Fleck
             }
 
             ListenerSocket = new SocketWrapper(socket);
-            SupportedSubProtocols = new string[0];
+            SupportedSubProtocols = [];
         }
 
         public ISocket ListenerSocket { get; set; }
@@ -48,7 +48,7 @@ namespace Fleck
         public X509Certificate2 Certificate { get; set; }
         public SslProtocols EnabledSslProtocols { get; set; }
         public IEnumerable<string> SupportedSubProtocols { get; set; }
-        public bool RestartAfterListenError {get; set; }
+        public bool RestartAfterListenError { get; set; }
 
         public bool IsSecure
         {
@@ -64,15 +64,22 @@ namespace Fleck
         {
             string ipStr = uri.Host;
 
-            if (ipStr == "0.0.0.0" ){
+            if (ipStr == "0.0.0.0")
+            {
                 return IPAddress.Any;
-            }else if(ipStr == "[0000:0000:0000:0000:0000:0000:0000:0000]")
+            }
+            else if (ipStr == "[0000:0000:0000:0000:0000:0000:0000:0000]")
             {
                 return IPAddress.IPv6Any;
-            } else {
-                try {
+            }
+            else
+            {
+                try
+                {
                     return IPAddress.Parse(ipStr);
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     throw new FormatException("Failed to parse the IP address part of the location. Please make sure you specify a valid IP address. Use 0.0.0.0 or [::] to listen on all interfaces.", ex);
                 }
             }
@@ -105,9 +112,11 @@ namespace Fleck
 
         private void ListenForClients()
         {
-            ListenerSocket.Accept(OnClientConnect, e => {
+            ListenerSocket.Accept(OnClientConnect, e =>
+            {
                 FleckLog.Error("Listener socket is closed", e);
-                if(RestartAfterListenError){
+                if (RestartAfterListenError)
+                {
                     FleckLog.Info("Listener socket restarting");
                     try
                     {

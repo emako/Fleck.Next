@@ -1,21 +1,20 @@
+using Fleck.Helpers;
 using System;
 using System.IO;
 using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
-using System.Runtime.InteropServices;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using System.Threading;
-using Fleck.Helpers;
+using System.Threading.Tasks;
 
 namespace Fleck
 {
     public class SocketWrapper : ISocket
     {
-        public const uint KeepAliveInterval = 60000;
-        public const uint RetryInterval = 10000;
+        public const uint KeepAliveTime = 60000u;
+        public const uint KeepAliveInterval = 10000u;
 
         private readonly Socket _socket;
         private Stream _stream;
@@ -27,7 +26,7 @@ namespace Fleck
             get
             {
                 var endpoint = _socket.RemoteEndPoint as IPEndPoint;
-                return endpoint != null ? endpoint.Address.ToString() : null;
+                return endpoint?.Address.ToString();
             }
         }
 
@@ -35,22 +34,12 @@ namespace Fleck
         {
             get
             {
-                var endpoint = _socket.RemoteEndPoint as IPEndPoint;
-                return endpoint != null ? endpoint.Port : -1;
+                return _socket.RemoteEndPoint is IPEndPoint endpoint ? endpoint.Port : -1;
             }
         }
 
-        public void SetKeepAlive(Socket socket, uint keepAliveInterval, uint retryInterval)
-        {
-            int size = sizeof(uint);
-            uint on = 1;
-
-            byte[] inArray = new byte[size * 3];
-            Array.Copy(BitConverter.GetBytes(on), 0, inArray, 0, size);
-            Array.Copy(BitConverter.GetBytes(keepAliveInterval), 0, inArray, size, size);
-            Array.Copy(BitConverter.GetBytes(retryInterval), 0, inArray, size * 2, size);
-            socket.IOControl(IOControlCode.KeepAliveValues, inArray, null);
-        }
+        public void SetKeepAlive(bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount = 5)
+            => _socket.SetKeepAlive(keepAlive, keepAliveTime, keepAliveInterval, retryCount);
 
         public SocketWrapper(Socket socket)
         {
@@ -62,10 +51,7 @@ namespace Fleck
 
             // The tcp keepalive default values on most systems
             // are huge (~7200s). Set them to something more reasonable.
-            if (FleckRuntime.IsRunningOnWindows())
-            {
-                SetKeepAlive(socket, KeepAliveInterval, RetryInterval);
-            }
+            _socket.SetKeepAlive(true, KeepAliveTime, KeepAliveInterval);
         }
 
         public Task Authenticate(X509Certificate2 certificate, SslProtocols enabledSslProtocols, Action callback, Action<Exception> error)
