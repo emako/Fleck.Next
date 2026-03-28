@@ -5,14 +5,22 @@ namespace Fleck.Helpers
 {
     internal static class SocketExtension
     {
+        /// <summary>
+        /// Enables or disables TCP keep-alive on a socket and configures related options.
+        /// </summary>
+        /// <param name="socket">The underlying TCP <see cref="Socket"/> to configure.</param>
+        /// <param name="keepAlive">Whether to enable (<c>true</c>) or disable (<c>false</c>) TCP keep-alive.</param>
+        /// <param name="keepAliveTime">The idle time in milliseconds before the first keep-alive probe is sent.</param>
+        /// <param name="keepAliveInterval">The interval in milliseconds between subsequent keep-alive probes when no acknowledgment is received.</param>
+        /// <param name="retryCount">The number of keep-alive probes to send before the connection is considered dead (where supported).</param>
         public static void SetKeepAlive(this Socket socket, bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount = 5)
         {
             if (FleckRuntime.IsRunningOnWindows())
             {
 #if NETCOREAPP3_0_OR_GREATER
-                socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
-                socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveTime, 60);
-                socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveInterval, 10);
+                socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, keepAlive);
+                socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveTime, keepAliveTime / 1000); // Seconds
+                socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveInterval, keepAliveInterval / 1000); // Seconds
                 socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveRetryCount, retryCount);
 #else
                 socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
