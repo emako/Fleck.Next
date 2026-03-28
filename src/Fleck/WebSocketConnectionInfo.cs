@@ -1,28 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Fleck
 {
     public class WebSocketConnectionInfo : IWebSocketConnectionInfo
     {
-        const string CookiePattern = @"((;)*(\s)*(?<cookie_name>[^=]+)=(?<cookie_value>[^\;]+))+";
-        private static readonly Regex CookieRegex = new Regex(CookiePattern, RegexOptions.Compiled);
+        private const string CookiePattern = @"((;)*(\s)*(?<cookie_name>[^=]+)=(?<cookie_value>[^\;]+))+";
+        private static readonly Regex CookieRegex = new(CookiePattern, RegexOptions.Compiled);
 
         public static WebSocketConnectionInfo Create(WebSocketHttpRequest request, string clientIp, int clientPort, string negotiatedSubprotocol)
         {
             var info = new WebSocketConnectionInfo
-                           {
-                               Origin = request["Origin"] ?? request["Sec-WebSocket-Origin"],
-                               Host = request["Host"],
-                               SubProtocol = request["Sec-WebSocket-Protocol"],
-                               Path = request.Path,
-                               ClientIpAddress = clientIp,
-                               ClientPort = clientPort,
-                               NegotiatedSubProtocol = negotiatedSubprotocol,
-                               Headers = new Dictionary<string, string>(request.Headers, System.StringComparer.InvariantCultureIgnoreCase)
-                           };
+            {
+                Origin = request["Origin"] ?? request["Sec-WebSocket-Origin"],
+                Host = request["Host"],
+                SubProtocol = request["Sec-WebSocket-Protocol"],
+                Path = request.Path,
+                ClientIpAddress = clientIp,
+                ClientPort = clientPort,
+                NegotiatedSubProtocol = negotiatedSubprotocol,
+                Headers = new Dictionary<string, string>(request.Headers, StringComparer.InvariantCultureIgnoreCase)
+            };
             var cookieHeader = request["Cookie"];
 
             if (cookieHeader != null)
@@ -41,7 +40,6 @@ namespace Fleck
             return info;
         }
 
-
         WebSocketConnectionInfo()
         {
             Cookies = new Dictionary<string, string>();
@@ -54,7 +52,7 @@ namespace Fleck
         public string Host { get; private set; }
         public string Path { get; private set; }
         public string ClientIpAddress { get; set; }
-        public int    ClientPort { get; set; }
+        public int ClientPort { get; set; }
         public Guid Id { get; set; }
 
         public IDictionary<string, string> Cookies { get; private set; }

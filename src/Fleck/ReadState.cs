@@ -7,10 +7,13 @@ namespace Fleck
     {
         public ReadState()
         {
-            Data = new List<byte>();
+            Data = [];
         }
+
         public List<byte> Data { get; private set; }
+
         public FrameType? FrameType { get; set; }
+
         public void Clear()
         {
             Data.Clear();
@@ -18,4 +21,3 @@ namespace Fleck
         }
     }
 }
-

@@ -1,6 +1,5 @@
-using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Fleck
 {
@@ -8,12 +7,14 @@ namespace Fleck
     {
         public static string Negotiate(IEnumerable<string> server, IEnumerable<string> client)
         {
-            if (!server.Any() || !client.Any()) {
+            if (!server.Any() || !client.Any())
+            {
                 return null;
             }
 
             var matches = client.Intersect(server);
-            if (!matches.Any()) {
+            if (!matches.Any())
+            {
                 throw new SubProtocolNegotiationFailureException("Unable to negotiate a subprotocol");
             }
             return matches.First();

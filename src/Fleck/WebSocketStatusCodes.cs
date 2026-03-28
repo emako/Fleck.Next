@@ -1,5 +1,3 @@
-using System;
-
 namespace Fleck
 {
     public static class WebSocketStatusCodes
@@ -16,14 +14,13 @@ namespace Fleck
         public const ushort MandatoryExt = 1010;
         public const ushort InternalServerError = 1011;
         public const ushort TLSHandshake = 1015;
-        
+
         public const ushort ApplicationError = 3000;
-        
-        public static ushort[] ValidCloseCodes = new []{
+
+        public static ushort[] ValidCloseCodes = [
             NormalClosure, GoingAway, ProtocolError, UnsupportedDataType,
             InvalidFramePayloadData, PolicyViolation, MessageTooBig,
             MandatoryExt, InternalServerError
-        };
+        ];
     }
 }
-

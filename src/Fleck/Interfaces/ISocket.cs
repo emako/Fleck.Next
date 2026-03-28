@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Net;
-using System.Net.Sockets;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -10,24 +9,34 @@ namespace Fleck
 {
     public interface ISocket
     {
-        bool Connected { get; }
-        string RemoteIpAddress { get; }
-        int RemotePort { get; }
-        Stream Stream { get; }
-        bool NoDelay { get; set; }
-        EndPoint LocalEndPoint { get; }
+        public bool Connected { get; }
 
-        Task<ISocket> Accept(Action<ISocket> callback, Action<Exception> error);
-        Task Send(byte[] buffer, Action callback, Action<Exception> error);
-        Task<int> Receive(byte[] buffer, Action<int> callback, Action<Exception> error, int offset = 0);
-        Task Authenticate(X509Certificate2 certificate, SslProtocols enabledSslProtocols, Action callback, Action<Exception> error);
+        public string RemoteIpAddress { get; }
 
-        void Dispose();
-        void Close();
+        public int RemotePort { get; }
 
-        void Bind(EndPoint ipLocal);
-        void Listen(int backlog);
+        public Stream Stream { get; }
 
-        void SetKeepAlive(bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount = 5);
+        public bool NoDelay { get; set; }
+
+        public EndPoint LocalEndPoint { get; }
+
+        public Task<ISocket> Accept(Action<ISocket> callback, Action<Exception> error);
+
+        public Task Send(byte[] buffer, Action callback, Action<Exception> error);
+
+        public Task<int> Receive(byte[] buffer, Action<int> callback, Action<Exception> error, int offset = 0);
+
+        public Task Authenticate(X509Certificate2 certificate, SslProtocols enabledSslProtocols, Action callback, Action<Exception> error);
+
+        public void Dispose();
+
+        public void Close();
+
+        public void Bind(EndPoint ipLocal);
+
+        public void Listen(int backlog);
+
+        public void SetKeepAlive(bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount = 5);
     }
 }

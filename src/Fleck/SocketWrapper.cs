@@ -30,13 +30,7 @@ namespace Fleck
             }
         }
 
-        public int RemotePort
-        {
-            get
-            {
-                return _socket.RemoteEndPoint is IPEndPoint endpoint ? endpoint.Port : -1;
-            }
-        }
+        public int RemotePort => _socket.RemoteEndPoint is IPEndPoint endpoint ? endpoint.Port : -1;
 
         public void SetKeepAlive(bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount = 5)
             => _socket?.SetKeepAlive(keepAlive, keepAliveTime, keepAliveInterval, retryCount);
@@ -79,26 +73,17 @@ namespace Fleck
             _socket.Bind(endPoint);
         }
 
-        public bool Connected
-        {
-            get { return _socket.Connected; }
-        }
+        public bool Connected => _socket.Connected;
 
-        public Stream Stream
-        {
-            get { return _stream; }
-        }
+        public Stream Stream => _stream;
 
         public bool NoDelay
         {
-            get { return _socket.NoDelay; }
-            set { _socket.NoDelay = value; }
+            get => _socket.NoDelay;
+            set => _socket.NoDelay = value;
         }
 
-        public EndPoint LocalEndPoint
-        {
-            get { return _socket.LocalEndPoint; }
-        }
+        public EndPoint LocalEndPoint => _socket.LocalEndPoint;
 
         public Task<int> Receive(byte[] buffer, Action<int> callback, Action<Exception> error, int offset)
         {
@@ -133,15 +118,15 @@ namespace Fleck
         public void Dispose()
         {
             _tokenSource.Cancel();
-            if (_stream != null) _stream.Dispose();
-            if (_socket != null) _socket.Dispose();
+            _stream?.Dispose();
+            _socket?.Dispose();
         }
 
         public void Close()
         {
             _tokenSource.Cancel();
-            if (_stream != null) _stream.Close();
-            if (_socket != null) _socket.Close();
+            _stream?.Close();
+            _socket?.Close();
         }
 
         public int EndSend(IAsyncResult asyncResult)

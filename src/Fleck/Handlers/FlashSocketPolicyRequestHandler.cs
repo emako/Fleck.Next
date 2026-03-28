@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Fleck.Handlers
 {
     public class FlashSocketPolicyRequestHandler
     {
-        public static string PolicyResponse = 
+        public static string PolicyResponse =
 "<?xml version=\"1.0\"?>\n" +
 "<cross-domain-policy>\n" +
 "   <allow-access-from domain=\"*\" to-ports=\"*\"/>\n" +
@@ -21,7 +19,7 @@ namespace Fleck.Handlers
                 Handshake = sub => FlashSocketPolicyRequestHandler.Handshake(request, sub),
             };
         }
-        
+
         public static byte[] Handshake(WebSocketHttpRequest request, string subProtocol)
         {
             FleckLog.Debug("Building Flash Socket Policy Response");
@@ -29,4 +27,3 @@ namespace Fleck.Handlers
         }
     }
 }
-

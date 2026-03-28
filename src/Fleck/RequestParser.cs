@@ -5,14 +5,15 @@ namespace Fleck
 {
     public class RequestParser
     {
-        const string pattern = @"^(?<method>[^\s]+)\s(?<path>[^\s]+)\sHTTP\/1\.1\r\n" + // request line
+        private const string pattern = @"^(?<method>[^\s]+)\s(?<path>[^\s]+)\sHTTP\/1\.1\r\n" + // request line
                                @"((?<field_name>[^:\r\n]+):(?([^\r\n])\s)*(?<field_value>[^\r\n]*)\r\n)+" + //headers
                                @"\r\n" + //newline
                                @"(?<body>.+)?";
-        const string FlashSocketPolicyRequestPattern = @"^[<]policy-file-request\s*[/][>]";
 
-        private static readonly Regex _regex = new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
-        private static readonly Regex _FlashSocketPolicyRequestRegex = new Regex(FlashSocketPolicyRequestPattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private const string FlashSocketPolicyRequestPattern = @"^[<]policy-file-request\s*[/][>]";
+
+        private static readonly Regex _regex = new(pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private static readonly Regex _FlashSocketPolicyRequestRegex = new(FlashSocketPolicyRequestPattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         public static WebSocketHttpRequest Parse(byte[] bytes)
         {
@@ -66,4 +67,3 @@ namespace Fleck
         }
     }
 }
-

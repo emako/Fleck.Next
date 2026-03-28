@@ -7,7 +7,7 @@ namespace Fleck
         public static byte[] ToBigEndianBytes<T>(this int source)
         {
             byte[] bytes;
-            
+
             var type = typeof(T);
             if (type == typeof(ushort))
                 bytes = BitConverter.GetBytes((ushort)source);
@@ -17,7 +17,7 @@ namespace Fleck
                 bytes = BitConverter.GetBytes(source);
             else
                 throw new InvalidCastException("Cannot be cast to T");
-                
+
             if (BitConverter.IsLittleEndian)
                 Array.Reverse(bytes);
             return bytes;
@@ -25,17 +25,16 @@ namespace Fleck
 
         public static int ToLittleEndianInt(this byte[] source)
         {
-            if(BitConverter.IsLittleEndian)
+            if (BitConverter.IsLittleEndian)
                 Array.Reverse(source);
 
-            if(source.Length == 2)
+            if (source.Length == 2)
                 return BitConverter.ToUInt16(source, 0);
 
-            if(source.Length == 8)
+            if (source.Length == 8)
                 return (int)BitConverter.ToUInt64(source, 0);
 
             throw new ArgumentException("Unsupported Size");
         }
     }
 }
-

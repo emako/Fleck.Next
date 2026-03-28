@@ -39,6 +39,5 @@ namespace Fleck
         {
             LogAction(LogLevel.Info, message, ex);
         }
-
     }
 }

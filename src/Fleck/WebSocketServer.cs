@@ -1,11 +1,10 @@
+using Fleck.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Security.Cryptography.X509Certificates;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Security.Authentication;
-using Fleck.Helpers;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Fleck
 {
@@ -148,11 +147,11 @@ namespace Fleck
                 _config,
                 bytes => RequestParser.Parse(bytes, _scheme),
                 r => HandlerFactory.BuildHandler(r,
-                                                 s => connection.OnMessage(s),
-                                                 connection.Close,
-                                                 b => connection.OnBinary(b),
-                                                 b => connection.OnPing(b),
-                                                 b => connection.OnPong(b)),
+                    s => connection.OnMessage(s),
+                    connection.Close,
+                    b => connection.OnBinary(b),
+                    b => connection.OnPing(b),
+                    b => connection.OnPong(b)),
                 s => SubProtocolNegotiator.Negotiate(SupportedSubProtocols, s));
 
             if (IsSecure)

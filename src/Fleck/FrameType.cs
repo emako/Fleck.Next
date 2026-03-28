@@ -1,5 +1,3 @@
-using System;
-
 namespace Fleck
 {
     public enum FrameType : byte
@@ -12,4 +10,3 @@ namespace Fleck
         Pong = 10,
     }
 }
-

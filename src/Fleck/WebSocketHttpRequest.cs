@@ -5,7 +5,7 @@ namespace Fleck
 {
     public class WebSocketHttpRequest
     {
-        private readonly IDictionary<string, string> _headers = new Dictionary<string, string>(System.StringComparer.InvariantCultureIgnoreCase);
+        private readonly IDictionary<string, string> _headers = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
 
         public string Method { get; set; }
 
@@ -18,31 +18,12 @@ namespace Fleck
         public byte[] Bytes { get; set; }
 
         public string this[string name]
-        {
-            get
-            {
-                string value;
-                return _headers.TryGetValue(name, out value) ? value : default(string);
-            }
-        }
+            => _headers.TryGetValue(name, out string value) ? value : default;
 
-        public IDictionary<string, string> Headers
-        {
-            get
-            {
-                return _headers;
-            }
-        }
-        
-        public string[] SubProtocols {
-          get
-          {
-            string value;
-          return _headers.TryGetValue("Sec-WebSocket-Protocol", out value)
-              ? value.Split(new []{',', ' '}, StringSplitOptions.RemoveEmptyEntries)
-              : new string[0];
-          }
-        }
+        public IDictionary<string, string> Headers => _headers;
+
+        public string[] SubProtocols => _headers.TryGetValue("Sec-WebSocket-Protocol", out string value)
+            ? value.Split([',', ' '], StringSplitOptions.RemoveEmptyEntries)
+            : [];
     }
 }
-

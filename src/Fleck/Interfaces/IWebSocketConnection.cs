@@ -5,21 +5,36 @@ namespace Fleck
 {
     public interface IWebSocketConnection
     {
-        Action OnOpen { get; set; }
-        Action OnClose { get; set; }
-        Action<string> OnMessage { get; set; }
-        Action<byte[]> OnBinary { get; set; }
-        Action<byte[]> OnPing { get; set; }
-        Action<byte[]> OnPong { get; set; }
-        Action<Exception> OnError { get; set; }
-        Task Send(string message);
-        Task Send(byte[] message);
-        Task SendPing(byte[] message);
-        Task SendPong(byte[] message);
-        void Close();
-        void Close(int code);
-        void SetKeepAlive(bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount = 5);
+        public Action OnOpen { get; set; }
+
+        public Action OnClose { get; set; }
+
+        public Action<string> OnMessage { get; set; }
+
+        public Action<byte[]> OnBinary { get; set; }
+
+        public Action<byte[]> OnPing { get; set; }
+
+        public Action<byte[]> OnPong { get; set; }
+
+        public Action<Exception> OnError { get; set; }
+
+        public Task Send(string message);
+
+        public Task Send(byte[] message);
+
+        public Task SendPing(byte[] message);
+
+        public Task SendPong(byte[] message);
+
+        public void Close();
+
+        public void Close(int code);
+
+        public void SetKeepAlive(bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount = 5);
+
         IWebSocketConnectionInfo ConnectionInfo { get; }
-        bool IsAvailable { get; }
+
+        public bool IsAvailable { get; }
     }
 }

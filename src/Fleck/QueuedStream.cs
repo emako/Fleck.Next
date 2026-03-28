@@ -11,40 +11,28 @@ namespace Fleck
     /// </summary>
     public class QueuedStream : Stream
     {
-        readonly Stream _stream;
-        readonly Queue<WriteData> _queue = new Queue<WriteData>();
-        int _pendingWrite;
-        bool _disposed;
+        private readonly Stream _stream;
+        private readonly Queue<WriteData> _queue = new();
+        private int _pendingWrite;
+        private bool _disposed;
 
         public QueuedStream(Stream stream)
         {
             _stream = stream;
         }
 
-        public override bool CanRead
-        {
-            get { return _stream.CanRead; }
-        }
+        public override bool CanRead => _stream.CanRead;
 
-        public override bool CanSeek
-        {
-            get { return _stream.CanSeek; }
-        }
+        public override bool CanSeek => _stream.CanSeek;
 
-        public override bool CanWrite
-        {
-            get { return _stream.CanWrite; }
-        }
+        public override bool CanWrite => _stream.CanWrite;
 
-        public override long Length
-        {
-            get { return _stream.Length; }
-        }
+        public override long Length => _stream.Length;
 
         public override long Position
         {
-            get { return _stream.Position; }
-            set { _stream.Position = value; }
+            get => _stream.Position;
+            set => _stream.Position = value;
         }
 
         public override int Read(byte[] buffer, int offset, int count)
@@ -202,13 +190,13 @@ namespace Fleck
             }
         }
 
-        #endregion
+        #endregion Nested type: WriteData
 
         #region Nested type: QueuedWriteResult
 
         class QueuedWriteResult : IAsyncResult
         {
-            readonly object _state;
+            private readonly object _state;
 
             public QueuedWriteResult(object state)
             {
@@ -219,27 +207,15 @@ namespace Fleck
 
             public IAsyncResult ActualResult { get; set; }
 
-            public object AsyncState
-            {
-                get { return _state; }
-            }
+            public object AsyncState => _state;
 
-            public WaitHandle AsyncWaitHandle
-            {
-                get { throw new NotSupportedException("Queued write operations do not support wait handle."); }
-            }
+            public WaitHandle AsyncWaitHandle => throw new NotSupportedException("Queued write operations do not support wait handle.");
 
-            public bool CompletedSynchronously
-            {
-                get { return false; }
-            }
+            public bool CompletedSynchronously => false;
 
-            public bool IsCompleted
-            {
-                get { return ActualResult != null && ActualResult.IsCompleted; }
-            }
+            public bool IsCompleted => ActualResult != null && ActualResult.IsCompleted;
         }
 
-        #endregion
+        #endregion Nested type: QueuedWriteResult
     }
 }
