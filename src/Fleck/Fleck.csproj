@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Title>Fleck</Title>
-    <Version>0.0.0.1-local</Version>
+    <PackageId>Fleck.Next</PackageId>
+    <Version>1.2.0</Version>
     <Authors>statenjason</Authors>
     <Copyright>Copyright Jason Staten 2010-2018. All rights reserved.</Copyright>
     <Description>C# WebSocket Implementation</Description>
