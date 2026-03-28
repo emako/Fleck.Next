@@ -14,10 +14,9 @@ namespace Fleck
 {
     public class SocketWrapper : ISocket
     {
-    
-        public const UInt32 KeepAliveInterval = 60000;
-        public const UInt32 RetryInterval = 10000;
-    
+        public const uint KeepAliveInterval = 60000;
+        public const uint RetryInterval = 10000;
+
         private readonly Socket _socket;
         private Stream _stream;
         private CancellationTokenSource _tokenSource;
@@ -41,10 +40,10 @@ namespace Fleck
             }
         }
 
-        public void SetKeepAlive(Socket socket, UInt32 keepAliveInterval, UInt32 retryInterval)
+        public void SetKeepAlive(Socket socket, uint keepAliveInterval, uint retryInterval)
         {
-            int size = sizeof(UInt32);
-            UInt32 on = 1;
+            int size = sizeof(uint);
+            uint on = 1;
 
             byte[] inArray = new byte[size * 3];
             Array.Copy(BitConverter.GetBytes(on), 0, inArray, 0, size);
