@@ -12,7 +12,7 @@ namespace Fleck.Helpers
 
         public static bool IsRunningOnWindows()
         {
-#if NET45 || NET40
+#if NETFRAMEWORK
             return true;
 #else
             return (RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
