@@ -1,6 +1,6 @@
 ### 1.2.0
 
-- Originally forked from [statianzo/Fleck](statianzo/Fleck)
+- Originally forked from [statianzo/Fleck](https://github.com/statianzo/Fleck)
 
 ### 1.2.1
 
@@ -9,7 +9,7 @@
 
 ### 1.2.2
 
-- Make SetKeepAlive retryCount optional (default 5)
+- Make `retryCount` of `SetKeepAlive` optional (default 5)
 - Modernize C# syntax and clean up code
 
 ### 1.2.3
