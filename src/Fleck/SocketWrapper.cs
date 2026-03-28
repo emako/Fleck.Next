@@ -32,9 +32,6 @@ namespace Fleck
 
         public int RemotePort => _socket.RemoteEndPoint is IPEndPoint endpoint ? endpoint.Port : -1;
 
-        public void SetKeepAlive(bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount = 5)
-            => _socket?.SetKeepAlive(keepAlive, keepAliveTime, keepAliveInterval, retryCount);
-
         public SocketWrapper(Socket socket)
         {
             _tokenSource = new CancellationTokenSource();
@@ -43,9 +40,21 @@ namespace Fleck
             if (_socket.Connected)
                 _stream = new NetworkStream(_socket);
 
-            // The tcp keepalive default values on most systems
+            // The tcp keep-alive default values on most systems
             // are huge (~7200s). Set them to something more reasonable.
-            _socket.SetKeepAlive(true, KeepAliveTime, KeepAliveInterval);
+            SetKeepAlive(true, KeepAliveTime, KeepAliveInterval);
+        }
+
+        public void SetKeepAlive(bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount = 5)
+        {
+            try
+            {
+                _socket?.SetKeepAlive(keepAlive, keepAliveTime, keepAliveInterval, retryCount);
+            }
+            catch (Exception e)
+            {
+                FleckLog.Error("Exception occurred while setting internal socket keep-alive.", e);
+            }
         }
 
         public Task Authenticate(X509Certificate2 certificate, SslProtocols enabledSslProtocols, Action callback, Action<Exception> error)
