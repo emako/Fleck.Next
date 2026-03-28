@@ -2,16 +2,34 @@
   <PropertyGroup>
     <Title>Fleck</Title>
     <PackageId>Fleck.Next</PackageId>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <Authors>statenjason</Authors>
     <Copyright>Copyright Jason Staten 2010-2018. All rights reserved.</Copyright>
     <Description>C# WebSocket Implementation</Description>
-    <PackageLicenseUrl>https://github.com/statianzo/Fleck/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/statianzo/Fleck</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/statianzo/Fleck</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/emako/Fleck.Next</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/emako/Fleck.Next</RepositoryUrl>
     <PackageTags>websockets server html5 events</PackageTags>
     <TargetFrameworks>net40;net45;net451;net452;net46;net461;net462;net47;net471;net472;net48;net481;netstandard2.0;netstandard2.1;netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1;net5.0;net6.0;net7.0;net8.0;net9.0;net10.0</TargetFrameworks>
     <LangVersion>preview</LangVersion>
     <NoWarn>1701;1702;CA1416;NU1902;NU1903;SYSLIB0039;</NoWarn>
+    <PackageIcon>Logo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <IncludeSymbols>true</IncludeSymbols>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+	<ItemGroup>
+	  <None Include="..\..\assets\Logo.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 </Project>
