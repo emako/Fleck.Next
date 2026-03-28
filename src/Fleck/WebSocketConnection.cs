@@ -228,5 +228,9 @@ namespace Fleck
       _closing = false;
     }
 
+    public void SetKeepAlive(bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount = 5)
+    {
+        Socket?.SetKeepAlive(keepAlive, keepAliveTime, keepAliveInterval, retryCount);
+    }
   }
 }

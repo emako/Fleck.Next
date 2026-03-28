@@ -39,7 +39,7 @@ namespace Fleck
         }
 
         public void SetKeepAlive(bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount = 5)
-            => _socket.SetKeepAlive(keepAlive, keepAliveTime, keepAliveInterval, retryCount);
+            => _socket?.SetKeepAlive(keepAlive, keepAliveTime, keepAliveInterval, retryCount);
 
         public SocketWrapper(Socket socket)
         {

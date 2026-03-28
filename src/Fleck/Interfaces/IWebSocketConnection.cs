@@ -18,6 +18,7 @@ namespace Fleck
         Task SendPong(byte[] message);
         void Close();
         void Close(int code);
+        void SetKeepAlive(bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount);
         IWebSocketConnectionInfo ConnectionInfo { get; }
         bool IsAvailable { get; }
     }

@@ -27,5 +27,7 @@ namespace Fleck
 
         void Bind(EndPoint ipLocal);
         void Listen(int backlog);
+
+        void SetKeepAlive(bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount);
     }
 }
