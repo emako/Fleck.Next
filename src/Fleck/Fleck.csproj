@@ -2,8 +2,8 @@
   <PropertyGroup>
     <Title>Fleck</Title>
     <PackageId>Fleck.Next</PackageId>
-    <Version>1.2.1</Version>
-    <Authors>statenjason</Authors>
+    <Version>1.2.2</Version>
+    <Authors>statenjason, ema</Authors>
     <Copyright>Copyright Jason Staten 2010-2018. All rights reserved.</Copyright>
     <Description>C# WebSocket Implementation</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
