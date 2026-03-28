@@ -1,15 +1,7 @@
 <Solution>
-  <Configurations>
-    <Platform Name="Any CPU" />
-    <Platform Name="x86" />
-  </Configurations>
   <Folder Name="/Samples/">
-    <Project Path="Samples/ConsoleApp/ConsoleApp.csproj" Id="3d7680b4-0224-4f0c-b1f6-74fb7586ebdc">
-      <Platform Project="x86" />
-    </Project>
-    <Project Path="Samples/WinFormsExample/WinFormsExample.csproj" Id="cddbef46-1fc2-4eee-b502-f341e6713d58">
-      <Platform Project="x86" />
-    </Project>
+    <Project Path="Samples/ConsoleApp/ConsoleApp.csproj" />
+    <Project Path="Samples/WinFormsExample/WinFormsExample.csproj" />
   </Folder>
   <Project Path="Fleck.Tests/Fleck.Tests.csproj" />
   <Project Path="Fleck/Fleck.csproj" />
