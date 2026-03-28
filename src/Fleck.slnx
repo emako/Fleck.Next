@@ -1,0 +1,46 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Samples/">
+    <Project Path="Samples/ConsoleApp/ConsoleApp.csproj">
+      <Platform Project="x86" />
+    </Project>
+  </Folder>
+  <Project Path="Fleck.Tests/Fleck.Tests.csproj" />
+  <Project Path="Fleck/Fleck.csproj" />
+  <Properties Name="MonoDevelopProperties">
+    <Property Name="$0.CSharpFormattingPolicy" Value="$2" />
+    <Property Name="$0.DotNetNamingPolicy" Value="$3" />
+    <Property Name="$0.TextStylePolicy" Value="$4" />
+    <Property Name="$1.EolMarker" Value="Windows" />
+    <Property Name="$1.FileWidth" Value="120" />
+    <Property Name="$1.IndentWidth" Value="2" />
+    <Property Name="$1.inheritsScope" Value="text/plain" />
+    <Property Name="$1.inheritsSet" Value="VisualStudio" />
+    <Property Name="$1.NoTabsAfterNonTabs" Value="True" />
+    <Property Name="$1.scope" Value="text/x-csharp" />
+    <Property Name="$1.TabWidth" Value="2" />
+    <Property Name="$2.AfterDelegateDeclarationParameterComma" Value="True" />
+    <Property Name="$2.BeforeConstructorDeclarationParentheses" Value="False" />
+    <Property Name="$2.BeforeDelegateDeclarationParentheses" Value="False" />
+    <Property Name="$2.BeforeIndexerDeclarationBracket" Value="False" />
+    <Property Name="$2.BeforeMethodCallParentheses" Value="False" />
+    <Property Name="$2.BeforeMethodDeclarationParentheses" Value="False" />
+    <Property Name="$2.inheritsScope" Value="text/x-csharp" />
+    <Property Name="$2.inheritsSet" Value="Mono" />
+    <Property Name="$2.NewParentheses" Value="False" />
+    <Property Name="$2.scope" Value="text/x-csharp" />
+    <Property Name="$2.SpacesBeforeBrackets" Value="False" />
+    <Property Name="$3.DirectoryNamespaceAssociation" Value="PrefixedHierarchical" />
+    <Property Name="$3.ResourceNamePolicy" Value="FileFormatDefault" />
+    <Property Name="$4.FileWidth" Value="120" />
+    <Property Name="$4.inheritsScope" Value="text/plain" />
+    <Property Name="$4.inheritsSet" Value="Mono" />
+    <Property Name="$4.scope" Value="text/plain" />
+    <Property Name="$4.TabWidth" Value="4" />
+    <Property Name="Policies" Value="$0" />
+    <Property Name="StartupItem" Value="Samples\ConsoleApp\ConsoleApp.csproj" />
+  </Properties>
+</Solution>
