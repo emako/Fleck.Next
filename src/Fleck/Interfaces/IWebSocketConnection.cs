@@ -33,7 +33,7 @@ namespace Fleck
 
         public void SetKeepAlive(bool keepAlive, uint keepAliveTime, uint keepAliveInterval, uint retryCount = 5);
 
-        IWebSocketConnectionInfo ConnectionInfo { get; }
+        public IWebSocketConnectionInfo ConnectionInfo { get; }
 
         public bool IsAvailable { get; }
     }
